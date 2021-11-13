@@ -44,7 +44,7 @@ function AnimeFacts() {
     }
     fetchData();
     return () => { isMounted = false };
-  }, []);
+  }, [id]);
   const listItems = animeFactList.map((d) => <div key={d.fact_id} className="p-2"><ShowAnimeFact fact={d} /></div>);
   return (<div>
     <img alt ="" className ="object-contain h-48 w-full" src={animeImg } />
