@@ -30,15 +30,19 @@ function AnimeFacts() {
   const [animeFactList, setAnimeFactList] = React.useState([]);
   const [animeImg, setAnimeImg] = React.useState("");
   React.useEffect(() => {
-    let isMounted = true;    
-    fetch('https://anime-facts-rest-api.herokuapp.com/api/v1/'+id)
-      .then(results => results.json())
-      .then(data => {
-        if (isMounted) {
-          setAnimeFactList(data.data)
-          setAnimeImg(data.img)
-        }
-      });
+    let isMounted = true;
+    const fetchData = () => {
+      return fetch('https://anime-facts-rest-api.herokuapp.com/api/v1/' + id)
+    
+        .then(results => results.json())
+        .then(data => {
+          if (isMounted) {
+            setAnimeFactList(data.data)
+            setAnimeImg(data.img)
+          }
+        });
+    }
+    fetchData();
     return () => { isMounted = false };
   }, []);
   const listItems = animeFactList.map((d) => <div key={d.fact_id} className="p-2"><ShowAnimeFact fact={d} /></div>);
